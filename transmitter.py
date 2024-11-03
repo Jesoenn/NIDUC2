@@ -28,3 +28,17 @@ class Transmitter:
                 block.append(0)
             byte32_blocks.append(block)
         return byte32_blocks
+
+    def interlace(self,byte32_blocks):
+        #byte32_blocks list->bytearray->int
+        byte32_interlaced_blocks = []
+        byte32_interlaced_block=bytearray()
+        for i in range(32): #tyle bajtow w bloku
+            for j in range(len(byte32_blocks)): #tyle blokow
+                byte32_interlaced_block.append(byte32_blocks[j][i]) #i'ta pozycja z j'tego bloku32
+                if len(byte32_interlaced_block) == 32:
+                    byte32_interlaced_blocks.append(byte32_interlaced_block)
+                    byte32_interlaced_block=bytearray()
+        return byte32_interlaced_blocks
+
+
