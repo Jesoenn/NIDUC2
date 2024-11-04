@@ -1,17 +1,18 @@
 from BSC import BSC
 from transmitter import Transmitter
+from rs_coder import RS
 
 
-#bit error rate - GOOD
 transmitter=Transmitter()
 byte_32_blocks=transmitter.prepare_to_transmit() # image to send in byte format | list->bytearray
-byte_32_interlaced_blocks=transmitter.interlace(byte_32_blocks)
 
-# sprawdzenie przeplotu mniej wiecej
-print(byte_32_blocks[0][0],byte_32_blocks[1][0],byte_32_blocks[2][0])
-print(byte_32_interlaced_blocks[0][0],byte_32_interlaced_blocks[0][1],byte_32_interlaced_blocks[0][2])
+# encoding
+rs=RS(3)
+byte_32_blocks_encoded=rs.encode(byte_32_blocks[:])
+# interlacing encoded blocks
+byte_32_interlaced_blocks=transmitter.interlace(byte_32_blocks_encoded[:])
 
-
+# simulating bits traveling through channel
 channel_good=BSC("GOOD")
 channel_good.receiver(byte_32_blocks)
 

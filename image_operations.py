@@ -1,15 +1,14 @@
 from fileinput import close
-
 from PIL import Image
 
-
 def get_image_bytes():
+    """Returns all bytes from image"""
     image_path="image.png"
     img=open(image_path, "rb")
     return bytearray(img.read())
 
-#
 def create_image(image_byte_blocks):
+    """Creates an image from given bytes"""
     image_path="image_compiled.png"
     img=open(image_path, "wb")
     image_bytes=bytearray()
