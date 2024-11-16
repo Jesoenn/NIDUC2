@@ -1,5 +1,4 @@
 from reedsolo import RSCodec
-import reedsolo
 
 class RS:
     def __init__(self,corrections):

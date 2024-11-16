@@ -1,14 +1,20 @@
 from image_operations import get_image_bytes
+from rs_coder import RS
 
 class Transmitter:
     # Przygotowanie bloków do transmisji
+    def __init__(self):
+        self.original_byte_blocks = []
+        self.encoded_byte_blocks = []
+        self.encoded_interlaced_byte_blocks = []
+        self.encoded_interlaced_bit_blocks=[]
+
     def prepare_to_transmit(self):
         """Returns list of bytearrays"""
         image_bytes = get_image_bytes()
         print("Image length in bytes: ", len(image_bytes))
-        byte_blocks = self.divide_to_249_byte_blocks(image_bytes)
-        print("Image length in bytes after grouping: ", len(byte_blocks) * 249)
-        return byte_blocks
+        self.original_byte_blocks = self.divide_to_249_byte_blocks(image_bytes)
+        print("Image length in bytes after grouping: ", len(self.original_byte_blocks) * 249)
 
     def divide_to_249_byte_blocks(self,image_bytes):
         """Formats one image bytearray to list of bytearrays, each with 249bytes"""
@@ -54,3 +60,7 @@ class Transmitter:
             bitblock=""
         #255 bajtow w bloku, czyli 255*8 = 2040 bitow
         return bit_blocks
+
+    def encode(self):
+        rs = RS(3)
+        self.encoded_byte_blocks = rs.encode(self.original_byte_blocks[:])
