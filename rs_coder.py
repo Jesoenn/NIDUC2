@@ -1,13 +1,14 @@
 from reedsolo import RSCodec
+import reedsolo
 
 class RS:
     def __init__(self,corrections):
         self.rsc=RSCodec(corrections*2)
 
-    def encode(self, byte_32_blocks): #list -> bytearray
-        for i in range(len(byte_32_blocks)):
-            byte_32_blocks[i]=self.rsc.encode(byte_32_blocks[i])
-        return byte_32_blocks
+    def encode(self, byte_249_blocks): #list -> bytearray
+        for i in range(len(byte_249_blocks)):
+            byte_249_blocks[i]=self.rsc.encode(byte_249_blocks[i])
+        return byte_249_blocks
 
     #TEST
     def decode(self, encoded_blocks):
