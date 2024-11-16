@@ -1,3 +1,5 @@
+from reedsolo import ReedSolomonError
+
 from rs_coder import RS
 from image_operations import create_image
 class Satellite:
@@ -37,5 +39,21 @@ class Satellite:
 
     def decode(self):
         rs_decoder = RS(3)
-        self.decoded_byte_blocks = rs_decoder.decode(self.encoded_byte_blocks[:])
+
+        count_decoded=0
+        count_failed=0
+        for encoded_byte_block in self.encoded_byte_blocks:
+            try:
+                self.decoded_byte_blocks.append(rs_decoder.decode_array(encoded_byte_block))
+                count_decoded += 1
+            except ReedSolomonError:
+                count_failed += 1
+                decoded_byte_block=bytearray()
+                for i in range(len(encoded_byte_block) - 6):
+                    decoded_byte_block.append(encoded_byte_block[i])
+                self.decoded_byte_blocks.append(decoded_byte_block)
+
+        # TO GDZIES ZAPISAC
+        print("ZDEKODOWANE " + str(count_decoded))
+        print("NIEZDEKODOWANE " + str(count_failed))
         create_image(self.decoded_byte_blocks)

@@ -18,3 +18,6 @@ class RS:
             # [2] - the list of positions of the errata (errors and erasures)
             decoded_blocks.append(self.rsc.decode(block)[0])
         return decoded_blocks
+
+    def decode_array(self, encoded_block):
+        return self.rsc.decode(encoded_block)[0]
