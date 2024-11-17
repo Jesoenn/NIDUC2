@@ -1,6 +1,4 @@
-# Channel Name;BER;Total Bits;Total Errors;Total blocks;Average Errors per Block;
 import os.path
-
 
 def write_noise_comparison(channel_name, ber, total_bits, total_errors, total_blocks, avg_epr):
     if not os.path.exists("noise_test.csv"):

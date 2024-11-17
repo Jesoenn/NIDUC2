@@ -1,13 +1,20 @@
-from fileinput import close
 from PIL import Image
 
 
 def get_image_bytes():
-    """ Zwraca piksele jako bytearray """
+    """
+    Pobranie zdjecia (wylacznie jego pikseli)
+    Parametry:
+        - pixels: list -> tuple
+        - img_size: list -> int
+        - image_bytes: bytearray
+    Zwraca:
+        - image_bytes,img_size
+    """
     image_path = "image.png"
     img = Image.open(image_path).convert("RGB")
     img_size = list(img.size)
-    pixels = list(img.getdata())  # Pixel list (R, G, B) | LIST -> Tuple
+    pixels = list(img.getdata())  # Pixel list (R, G, B)
 
     image_bytes = bytearray()
     for pixel in pixels:
@@ -17,6 +24,15 @@ def get_image_bytes():
 
 
 def create_image(image_byte_blocks, image_size):
+    """
+    Na podstawie otrzymanych blokow pixeli, tworzy zdjecie o okreslonym rozmiarze
+    Parametry:
+        - image_byte_blocks: list->bytearray
+        - image_size: list->int
+        - image_bytes: bytearray
+        - pixels_RGB: list->tuple->bytearray (w kazdym tuple po 3 pixele - RGB)
+        - pixel: bytearray (o dlugosci 3 - RGB)
+    """
     image_bytes = bytearray()
     pixels_number = image_size[0]*image_size[1]
     for byte_block in image_byte_blocks:

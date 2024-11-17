@@ -2,8 +2,8 @@ from image_operations import get_image_bytes
 from rs_coder import RS
 
 class Transmitter:
-    # Przygotowanie bloków do transmisji
     def __init__(self):
+        # zmienne do zbierania danych
         self.original_byte_blocks = []
         self.encoded_byte_blocks = []
         self.encoded_interlaced_byte_blocks = []
@@ -11,14 +11,27 @@ class Transmitter:
         self.image_size = []
 
     def prepare_to_transmit(self):
-        """Returns list of bytearrays"""
+        """
+        Pobranie bytearray pikseli ze zdjecia oraz wielkosc zdjecia
+        Parametry:
+            - image_bytes: bytearray
+            - image_size: list
+            - original_byte_blocks: list -> bytearray
+        """
         image_bytes,self.image_size = get_image_bytes()
         print("Image length in bytes: ", len(image_bytes))
         self.original_byte_blocks = self.divide_to_249_byte_blocks(image_bytes)
         print("Image length in bytes after grouping: ", len(self.original_byte_blocks) * 249)
 
     def divide_to_249_byte_blocks(self,image_bytes):
-        """Formats one image bytearray to list of bytearrays, each with 249bytes"""
+        """
+        Formatowanie jednego bytearray na liste blokow bytearray, kazdy z 249 bajtami
+        Parametry:
+            - image_bytes: bytearray
+            - byte_249_blocks: list -> bytearray
+        Zwraca:
+            - byte_249_blocks
+        """
         byte_249_blocks = []
         block = bytearray()
         for byte in image_bytes:
@@ -34,11 +47,15 @@ class Transmitter:
             byte_249_blocks.append(block)
         return byte_249_blocks
 
-    # Przeplot
     def interlace(self,byte_blocks):
-        """Interlaces bytes from each block
-            Parameter:
-                byte_blocks: list of bytearrays, each has size of 255 bytes"""
+        """
+        Funkcja przeplotu bajtow pomiedzy blokami: z kazdego wiersza po kolei kolumnami.
+        Parametery:
+            - byte_blocks: list -> bytearray
+            - byte_interlaced_byte_blocks: list -> bytearray
+        Zwraca:
+            - byte_interlaced_byte_blocks
+        """
         byte_interlaced_blocks = []
         byte_interlaced_block=bytearray()
         bytes_in_block=len(byte_blocks[0])
@@ -52,6 +69,14 @@ class Transmitter:
 
 
     def bytes_to_bits(self, byte_blocks):
+        """
+        Funkcja zamiany bajtow na bity.
+        Parametery:
+            - byte_blocks: list -> bytearray
+            - bit_blocks: list -> string
+        Zwraca:
+            - bit_blocks
+        """
         bitblock = ""
         bit_blocks=[]
         for byte_block in byte_blocks:

@@ -2,6 +2,7 @@ import random
 class BSC:
 
     def __init__(self, ber_type):
+        # typy kanalow transmisyjnych
         bit_error_rates = [6 / 100000, 2 / 1000, 2 / 100]  # dobry, sredni, slaby
         if ber_type == "GOOD":
             self.bit_error_rate = bit_error_rates[0]
@@ -13,10 +14,19 @@ class BSC:
             raise Exception("BSC type error")
 
     def simulation(self, bit_blocks):
-        """Receives bits that go through the channel"""
+        """Otrzymuje bloki bitow przesylane przez kanal i zwraca je z szumem
+        Parametry:
+            - bit_blocks: list -> string
+        Zwraca:
+            - bit_blocks po szumach"""
         return self.noise(bit_blocks[:])
 
     def noise(self, bit_blocks):
+        """Symulacja szumu w kanale na podstawie BER
+        Parametry:
+            - bit_blocks: list -> string
+        Zwraca:
+            - bit_blocks po szumach"""
         for i in range(len(bit_blocks)):
             temp_bit_list = ""
             bit_block=bit_blocks[i]

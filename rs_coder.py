@@ -6,12 +6,22 @@ class RS:
         self.rsc=RSCodec(corrections*2)
 
     def encode(self, byte_249_blocks): #list -> bytearray
+        """
+        Kodowanie blokow bajtow
+        Parametry:
+            - byte_249_blocks: list -> bytearray
+        """
         for i in range(len(byte_249_blocks)):
             byte_249_blocks[i]=self.rsc.encode(byte_249_blocks[i])
         return byte_249_blocks
 
     def decode(self, encoded_block):
-
+        """
+        Dekodowanie bloku bajtow
+        Parametry:
+            - encoded_block: bytearray
+            - decoded_byte_block, False/True: bytearray, czy dobrze poprawiony. False jezeli za duzo bledow (>3)
+        """
         # [0] - the decoded (corrected) message
         # [1] - the decoded message and error correction code (which is itself also corrected)
         # [2] - the list of positions of the errata (errors and erasures)
