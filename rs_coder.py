@@ -1,4 +1,5 @@
-from reedsolo import RSCodec
+from reedsolo import RSCodec, ReedSolomonError
+
 
 class RS:
     def __init__(self,corrections):
@@ -9,15 +10,15 @@ class RS:
             byte_249_blocks[i]=self.rsc.encode(byte_249_blocks[i])
         return byte_249_blocks
 
-    #TEST
-    def decode(self, encoded_blocks):
-        decoded_blocks = []
-        for block in encoded_blocks:
-            # [0] - the decoded (corrected) message
-            # [1] - the decoded message and error correction code (which is itself also corrected)
-            # [2] - the list of positions of the errata (errors and erasures)
-            decoded_blocks.append(self.rsc.decode(block)[0])
-        return decoded_blocks
+    def decode(self, encoded_block):
 
-    def decode_array(self, encoded_block):
-        return self.rsc.decode(encoded_block)[0]
+        # [0] - the decoded (corrected) message
+        # [1] - the decoded message and error correction code (which is itself also corrected)
+        # [2] - the list of positions of the errata (errors and erasures)
+        try:
+            return self.rsc.decode(encoded_block)[0], True
+        except ReedSolomonError:
+            decoded_byte_block = bytearray()
+            for i in range(len(encoded_block) - 6):
+                decoded_byte_block.append(encoded_block[i])
+            return decoded_byte_block, False

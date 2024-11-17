@@ -39,21 +39,14 @@ class Satellite:
 
     def decode(self):
         rs_decoder = RS(3)
-
         count_decoded=0
         count_failed=0
         for encoded_byte_block in self.encoded_byte_blocks:
-            try:
-                self.decoded_byte_blocks.append(rs_decoder.decode_array(encoded_byte_block))
-                count_decoded += 1
-            except ReedSolomonError:
-                count_failed += 1
-                decoded_byte_block=bytearray()
-                for i in range(len(encoded_byte_block) - 6):
-                    decoded_byte_block.append(encoded_byte_block[i])
-                self.decoded_byte_blocks.append(decoded_byte_block)
-
-        # TO GDZIES ZAPISAC
-        print("ZDEKODOWANE " + str(count_decoded))
-        print("NIEZDEKODOWANE " + str(count_failed))
+            decoded_byte_block,decoded_success=rs_decoder.decode(encoded_byte_block)
+            if decoded_success:
+                count_decoded+=1
+            else:
+                count_failed+=1
+            self.decoded_byte_blocks.append(decoded_byte_block)
         create_image(self.decoded_byte_blocks)
+        return count_decoded,count_failed

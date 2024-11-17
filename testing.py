@@ -1,4 +1,6 @@
 import file_operations
+from transmitter import Transmitter
+from satellite import Satellite
 
 
 def compare_bit_blocks(bit_blocks, noise_bit_blocks):
@@ -19,3 +21,6 @@ def noise_comparison(bit_blocks, noise_bit_blocks,channel,ber):
     for error in errors_list:
         total_errors+=error
     file_operations.write_noise_comparison(channel,ber,len(bit_blocks)*len(bit_blocks[0]),total_errors,len(bit_blocks),total_errors/len(bit_blocks))
+
+def decoder_success_rate(channel_name, ber, total_blocks,count_decoded,count_failed):
+    file_operations.write_decoding(channel_name,ber,total_blocks,count_decoded,count_failed)

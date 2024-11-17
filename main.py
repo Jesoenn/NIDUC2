@@ -20,15 +20,8 @@ noise_bit_255_interlaced_blocks=channel_good.simulation(transmitter.encoded_inte
 satellite.receive_bit_blocks(noise_bit_255_interlaced_blocks)
 satellite.encoded_byte_blocks=satellite.bits_to_bytes(satellite.encoded_bit_blocks)
 satellite.encoded_byte_blocks=satellite.deinterlace(satellite.encoded_byte_blocks)
-satellite.decode()
+count_decoded,count_failed=satellite.decode()
 
 
-
+testing.decoder_success_rate("GOOD", channel_good.bit_error_rate, len(satellite.decoded_byte_blocks),count_decoded,count_failed)
 testing.noise_comparison(transmitter.encoded_interlaced_bit_blocks,noise_bit_255_interlaced_blocks,"GOOD",channel_good.bit_error_rate)
-
-
-
-# TRANSMITER POSIADA W SOBIE POLE KTORE MA LISTE TYCH BAJTOW I BITOW, posiada metode enode ktora uzywa rscoder
-# TAK SAMO Z SATELITA
-
-# po zdekodowaniu tworze zdjecie i zapisuje do pliku nowego, ile bledow w BAJTACH nie bitach,
