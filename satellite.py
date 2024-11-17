@@ -3,10 +3,11 @@ from reedsolo import ReedSolomonError
 from rs_coder import RS
 from image_operations import create_image
 class Satellite:
-    def __init__(self):
+    def __init__(self, image_size):
         self.encoded_bit_blocks = []
         self.encoded_byte_blocks = []
         self.decoded_byte_blocks = []
+        self.image_size = image_size
 
     def receive_bit_blocks(self, bit_blocks):
         self.encoded_bit_blocks = bit_blocks
@@ -48,5 +49,5 @@ class Satellite:
             else:
                 count_failed+=1
             self.decoded_byte_blocks.append(decoded_byte_block)
-        create_image(self.decoded_byte_blocks)
+        create_image(self.decoded_byte_blocks,self.image_size)
         return count_decoded,count_failed

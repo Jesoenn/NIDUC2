@@ -8,10 +8,11 @@ class Transmitter:
         self.encoded_byte_blocks = []
         self.encoded_interlaced_byte_blocks = []
         self.encoded_interlaced_bit_blocks=[]
+        self.image_size = []
 
     def prepare_to_transmit(self):
         """Returns list of bytearrays"""
-        image_bytes = get_image_bytes()
+        image_bytes,self.image_size = get_image_bytes()
         print("Image length in bytes: ", len(image_bytes))
         self.original_byte_blocks = self.divide_to_249_byte_blocks(image_bytes)
         print("Image length in bytes after grouping: ", len(self.original_byte_blocks) * 249)
