@@ -12,6 +12,8 @@ image_operations -> zmiana pobierania calego skompresowanego zdjecia (png, 49kB 
 
 Dekodowanie: Na razie jak nie da sie zdekodowac jakiegos bloku (za duzo bledow) to po prostu jest zostawiany taki.
 Rozmiar zdjecia w pixelach jest przechowywany jako zmienna, nie przesylany z cala reszta, nie wiem czy tez to symulowac. Bo jezeli zakloci sie rozmiar w pixelach to zdjecie sie nie stworzy i nie bedzie widac szumu
+
+
 Znalazlem ze GF(2^8), wiec dalem rozumiem to tak, ze:
  kazda "litera" ma 8 bitow, czyli daje to bajt 
  maksymalna liczba slow 2^8-1 = 255
@@ -20,3 +22,4 @@ Znalazlem ze GF(2^8), wiec dalem rozumiem to tak, ze:
 
 
 Jeszcze nie dodalem komentarzy, beda
+Skrypty nie sa pogrupowane do pakietow na razie, bo robie wszystko na spontanie
