@@ -3,7 +3,7 @@ class BSC:
 
     def __init__(self, ber_type):
         # typy kanalow transmisyjnych
-        bit_error_rates = [6 / 100000, 2 / 1000, 2 / 100]  # dobry, sredni, slaby
+        bit_error_rates = [3 / 10000, 2 / 1000, 2 / 100]  # dobry, sredni, slaby
         if ber_type == "GOOD":
             self.bit_error_rate = bit_error_rates[0]
         elif ber_type == "MEDIUM":

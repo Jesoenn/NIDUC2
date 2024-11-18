@@ -62,6 +62,7 @@ class Satellite:
         Zwraca:
             - count_decoded, count_failed
         """
+        self.decoded_byte_blocks=[]
         rs_decoder = RS(Transmitter.corrections)
         count_decoded=0
         count_failed=0
