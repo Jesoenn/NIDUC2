@@ -1,0 +1,3 @@
+Channel Name;BER;Total Bytes;Total Byte Errors;Total blocks;Average Errors per Block
+BAD;0,02;360570;54207;1414;38,335926449787834
+GOOD;0,0003;360570;878;1414;0,620933521923621

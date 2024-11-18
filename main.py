@@ -4,7 +4,7 @@ from transmitter import Transmitter
 from satellite import Satellite
 import testing
 
-chosen_channel = "BAD"
+chosen_channel = "GOOD"
 transmitter=Transmitter() # obiekt transmitera
 transmitter.prepare_to_transmit() #  Caly plik podzielony na bajtowe bloki (wraz z miejscem na bledy korekcyjne)
 satellite=Satellite(transmitter.image_size) # obiekt Satelity z okreslonym rozmiarem zdjecia
@@ -24,4 +24,4 @@ count_decoded,count_failed=satellite.decode() # policzenie ile dekodowan sie pow
 
 
 testing.decoder_success_rate(chosen_channel, channel_good.bit_error_rate, len(satellite.decoded_byte_blocks),count_decoded,count_failed)
-#testing.noise_comparison(transmitter.encoded_interlaced_bit_blocks,noise_bit_255_interlaced_blocks,chosen_channel,channel_good.bit_error_rate)
+testing.noise_comparison(transmitter.encoded_interlaced_bit_blocks,noise_bit_255_interlaced_blocks,transmitter.encoded_byte_blocks,satellite.encoded_byte_blocks,chosen_channel,channel_good.bit_error_rate)
