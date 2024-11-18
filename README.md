@@ -24,11 +24,17 @@ Znalazlem ze GF(2^8), wiec dalem rozumiem to tak, ze:<br/>
 Jeszcze nie dodalem komentarzy, beda<br/>
 Skrypty nie sa pogrupowane do pakietow na razie, bo robie wszystko na spontanie<br/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> c84b9d76a718f7dc7ecbb128c42c379bb5298584
 
 
 Użyte biblieki zewnetrzne: <br/>
  PIL <br/>
  reedsolo <br/>
  moze cos jeszcze nie pamietam i potem zobacze <br/>
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> c84b9d76a718f7dc7ecbb128c42c379bb5298584
