@@ -22,7 +22,7 @@ def get_image_bytes():
     return image_bytes,img_size
 
 
-def create_image(image_byte_blocks, image_size):
+def create_image(image_byte_blocks, image_size, channel_used):
     """
     Na podstawie otrzymanych blokow pixeli, tworzy zdjecie o okreslonym rozmiarze
     Parametry:
@@ -51,4 +51,5 @@ def create_image(image_byte_blocks, image_size):
 
     img = Image.new("RGB", image_size)
     img.putdata(pixels_RGB)
-    img.save("image_compiled.png")
+    imgName ="image_compiled_"+str(channel_used)+".png"
+    img.save(imgName)
