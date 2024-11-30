@@ -54,7 +54,7 @@ class Satellite:
                     which_block = 0
         return byte_blocks
 
-    def decode(self):
+    def decode(self, channel_used):
         """Funkcja dekoduje blok po bloku, liczac ile dekodowan jest udanych i ile nie, a nastepnie tworzy zdjecie.
         Parametry:
             - count_decoded: int
@@ -73,5 +73,5 @@ class Satellite:
             else:
                 count_failed+=1
             self.decoded_byte_blocks.append(decoded_byte_block)
-        create_image(self.decoded_byte_blocks,self.image_size)
+        create_image(self.decoded_byte_blocks,self.image_size, channel_used)
         return count_decoded,count_failed
