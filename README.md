@@ -1,6 +1,10 @@
 # NIDUC2
 
-nie wiem czy excel bedzie interpretowac kropki w csv - przetestowac<br/>
+Do zrobienia </br>
+GEC -> probabilistycznie a nie hardcode </br>
+Testy -> to samo co wczesniej + bez przeplotu i z przeplotem + pisac ile bitow w kanale dobrym, ile w zlym </br>
+
+
 
 
 
