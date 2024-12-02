@@ -6,6 +6,8 @@ Testy -> to samo co wczesniej + bez przeplotu i z przeplotem + pisac ile bitow w
 Transmitter -> aby za parametr jakies metody okreslic czy chce robic z przeplotem czy bez </br>
 Satellite -> Tak samo zrobic zeby okreslic czy przesylamy przeplot czy bez, wiekszosc automatycznie </br>
 Main -> korekta zeby testy bardziej czytelne byly moze </br>
+*Do testów, w mainie, itd. pobierac dane po prostu z klasy, czyli zrobic tak zeby wszystko mozna bylo po prostu "wyjac z klas"* </br>
+
 
 
 
