@@ -1,9 +1,10 @@
 import random
 class GEC:
     def __init__(self):
-        self.b_no_err_to_good = 20  # ilosc bitów bez błędów, która wymusza zmianę kanału na GOOD
+        self.p_to_bad =0.0002 # prawdopodobieństwo przejscia na zły kanał
+        self.p_to_good = 0.0002 # prawdopodobieństwo przejscia na dobry kanał
         self.k = 0.0003  # prawdobodobieństwo błędu w w dobrym kanale
-        self.h = 0.05  # prawdobodobieństwo błędu w w złym kanale
+        self.h = 0.02  # prawdobodobieństwo błędu w w złym kanale
 
     def simulation(self,start_state, bit_blocks):
         """Otrzymuje bloki bitow przesylane przez kanal i zwraca je z szumem
@@ -21,17 +22,20 @@ class GEC:
             bit_block = bit_blocks[i]
             temp_bitblock = ""
             for bit in bit_block:
-                if state == "GOOD": #zmienia się na zły kanał po pojawieniu się 1 błędu
+                if state == "GOOD":
                     if random.random() <= self.k:
                         if bit == "0":
                             temp_bitblock += "1"
-                            state="BAD"
+                            err_num += 1
                         else:
                             temp_bitblock += "0"
-                            state="BAD"
+                            err_num += 1
                     else:
                         temp_bitblock += bit
-                elif state == "BAD": #zmienia się na dobry kanał gdy
+                    if random.random() <= self.p_to_bad + self.p_to_good*err_num:
+                        state = "BAD"
+                        err_num = 0
+                elif state == "BAD": #mała szansa zmienienia na dobry, szansa rosnie gdy pojawiają sie pod rząd bity bez błędów
                     if random.random() <= self.h:
                         if bit == "0":
                             temp_bitblock += "1"
@@ -42,7 +46,7 @@ class GEC:
                     else:
                         temp_bitblock += bit
                         if err_num==1: no_err += 1
-                    if no_err>= self.b_no_err_to_good:
+                    if random.random() <= self.p_to_good + self.p_to_bad*no_err:
                         state = "GOOD"
                         no_err = 0
                         err_num = 0
