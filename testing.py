@@ -39,14 +39,13 @@ def decoder_success_rate(channel_name, ber, total_blocks,count_decoded,count_fai
         - count_failed: int"""
     file_operations.write_decoding_ratio(channel_name,ber,total_blocks,count_decoded,count_failed)
 
-def noise_comparison_in_GEC_channel(bit_blocks, noise_bit_blocks,byte_blocks,noise_byte_blocks,start_state,k,b_no_err_to_good,h):
+def noise_comparison_in_GEC_channel(bit_blocks, noise_bit_blocks,byte_blocks,noise_byte_blocks,start_state,k,p_to_good,p_to_bad,h,is_interlaced):
     errors_bit_list=compare_blocks(bit_blocks, noise_bit_blocks)
     total_bit_errors=sum(errors_bit_list)
     errors_byte_list=compare_blocks(byte_blocks, noise_byte_blocks)
     total_byte_errors=sum(errors_byte_list)
-    # Starting State;k;Num of correct bits required to change channel;h;Total Bits;Total Bit Errors;Total blocks;Average Errors per Block
-    file_operations.write_noise_comparison_bits_for_GEC(start_state,k,b_no_err_to_good,h,len(bit_blocks)*len(bit_blocks[0]),total_bit_errors,len(bit_blocks),total_bit_errors/len(bit_blocks))
-    file_operations.write_noise_comparison_bytes_for_GEC(start_state,k,b_no_err_to_good,h,len(byte_blocks) * len(byte_blocks[0]),total_byte_errors,len(byte_blocks), total_byte_errors / len(byte_blocks))
+    file_operations.write_noise_comparison_bits_for_GEC(start_state,k,p_to_good,p_to_bad,h,len(bit_blocks)*len(bit_blocks[0]),total_bit_errors,len(bit_blocks),total_bit_errors/len(bit_blocks),is_interlaced)
+    file_operations.write_noise_comparison_bytes_for_GEC(start_state,k,p_to_good,p_to_bad,h,len(byte_blocks) * len(byte_blocks[0]),total_byte_errors,len(byte_blocks), total_byte_errors / len(byte_blocks),is_interlaced)
 
-def decoder_success_rate_in_GEC_channel(start_state,k,b_no_err_to_good, h, total_blocks,count_decoded,count_failed):
-    file_operations.write_decoding_ratio_for_GEC(start_state,k,b_no_err_to_good,h,total_blocks,count_decoded,count_failed)
+def decoder_success_rate_in_GEC_channel(start_state,k,p_to_good,p_to_bad, h, total_blocks,count_decoded,count_failed,is_interlaced):
+    file_operations.write_decoding_ratio_for_GEC(start_state,k,p_to_good,p_to_bad,h,total_blocks,count_decoded,count_failed,is_interlaced)
