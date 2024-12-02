@@ -3,6 +3,7 @@
 Do zrobienia </br>
 GEC -> probabilistycznie a nie hardcode </br>
 Testy -> to samo co wczesniej + bez przeplotu i z przeplotem + pisac ile bitow w kanale dobrym, ile w zlym </br>
+Transmitter -> aby za parametr jakies metody okreslic czy chce robic z przeplotem czy bez
 
 
 
