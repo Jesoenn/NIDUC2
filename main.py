@@ -25,7 +25,7 @@ for chosen_channel in channels:
             noise_bit_blocks = channel.simulation(transmitter.encoded_bit_blocks)
         satellite.receive_bit_blocks(noise_bit_blocks, transmission_type, channel_used)
 
-        # testy
+        # testy (TYLKO DLA PRZEPLOTU)
         testing.decoder_success_rate(chosen_channel, channel.bit_error_rate, len(satellite.decoded_byte_blocks),
                                      satellite.count_decoded, satellite.count_failed)
         testing.noise_comparison(transmitter.encoded_interlaced_bit_blocks, noise_bit_blocks,
