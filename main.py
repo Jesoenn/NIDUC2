@@ -6,34 +6,32 @@ from GEC import GEC
 import testing
 
 
+transmitter = Transmitter()
+transmitter.get_image()
+satellite = Satellite(transmitter.image_size)
 
-transmitter = Transmitter()  # obiekt transmitera
-transmitter.prepare_to_transmit()  # Caly plik podzielony na bajtowe bloki (wraz z miejscem na bledy korekcyjne)
-satellite = Satellite(transmitter.image_size)  # obiekt Satelity z okreslonym rozmiarem zdjecia
-transmitter.encode()  # enkodowanie Reeda Salomona
-transmitter.encoded_interlaced_byte_blocks = transmitter.interlace(
-transmitter.encoded_byte_blocks[:])  # zrobienie przeplotu z zakodowanego ciagu 255 bajtow
-transmitter.encoded_interlaced_bit_blocks = transmitter.bytes_to_bits(
-transmitter.encoded_interlaced_byte_blocks)  # zamiana bajtow na bity / przygotowanie do przeslania
-
-
+channel_used = "BSC"
+transmission_types= ["interlace","normal"]
 channels = ["GOOD","MEDIUM","BAD"]
 for chosen_channel in channels:
-    channel = BSC(chosen_channel)  # kanal BSC
-    for i in range(10):
-        # Simulacja przesylu bitow
-        noise_bit_255_interlaced_blocks = channel.simulation(transmitter.encoded_interlaced_bit_blocks)  # Odbior bitow i symulacja szumu
+    channel = BSC(chosen_channel)
+    transmission_type="interlace"
+    #for transmission_type in transmission_types:
+    for i in range(1):
+        transmitter.prepare_to_transmit(transmission_type)  # interlace, normal
+        if transmission_type == "interlace":
+            noise_bit_blocks = channel.simulation(transmitter.encoded_interlaced_bit_blocks)
+        else:
+            noise_bit_blocks = channel.simulation(transmitter.encoded_bit_blocks)
+        satellite.receive_bit_blocks(noise_bit_blocks, transmission_type, channel_used)
 
-        # Odbior satelity
-        satellite.receive_bit_blocks(noise_bit_255_interlaced_blocks)  # Odbiot blokow bitow
-        satellite.encoded_byte_blocks = satellite.bits_to_bytes(satellite.encoded_bit_blocks)  # zamiana bitow na bajty
-        satellite.encoded_byte_blocks = satellite.deinterlace(satellite.encoded_byte_blocks)  # Odwrocenie przeplotu
-        count_decoded, count_failed = satellite.decode()  # policzenie ile dekodowan sie powiodlo, a ile nie
+        # testy
         testing.decoder_success_rate(chosen_channel, channel.bit_error_rate, len(satellite.decoded_byte_blocks),
-                                     count_decoded, count_failed)
-        testing.noise_comparison(transmitter.encoded_interlaced_bit_blocks, noise_bit_255_interlaced_blocks,
+                                     satellite.count_decoded, satellite.count_failed)
+        testing.noise_comparison(transmitter.encoded_interlaced_bit_blocks, noise_bit_blocks,
                                  transmitter.encoded_byte_blocks, satellite.encoded_byte_blocks, chosen_channel,
                                  channel.bit_error_rate)
+"""
 states =["GOOD","BAD"]
 for chosen_state in states:
     gec = GEC()
@@ -49,4 +47,5 @@ for chosen_state in states:
         testing.noise_comparison_in_GEC_channel(transmitter.encoded_interlaced_bit_blocks, noise_bit_255_interlaced_blocks,
                                  transmitter.encoded_byte_blocks, satellite.encoded_byte_blocks, chosen_state,
                                                 gec.k, gec.b_no_err_to_good, gec.h)
+"""
 

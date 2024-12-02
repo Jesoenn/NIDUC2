@@ -7,13 +7,21 @@ class Transmitter:
     def __init__(self):
         # zmienne do zbierania danych
         self.original_byte_blocks = []
+
         self.encoded_byte_blocks = []
+        self.encoded_bit_blocks=[]
+
+
         self.encoded_interlaced_byte_blocks = []
         self.encoded_interlaced_bit_blocks=[]
-        self.image_size = []
-        
 
-    def prepare_to_transmit(self):
+        self.image_size = []
+        self.image_bytes = bytearray()
+        
+    def get_image(self):
+        self.image_bytes, self.image_size = get_image_bytes()
+
+    def prepare_to_transmit(self, transmission_type):
         """
         Pobranie bytearray pikseli ze zdjecia oraz wielkosc zdjecia
         Parametry:
@@ -21,10 +29,21 @@ class Transmitter:
             - image_size: list
             - original_byte_blocks: list -> bytearray
         """
-        image_bytes,self.image_size = get_image_bytes()
-        print("Image length in bytes: ", len(image_bytes))
-        self.original_byte_blocks = self.divide_to_byte_blocks(image_bytes)
+
+        self.original_byte_blocks = self.divide_to_byte_blocks(self.image_bytes) # podzielenie na bloki
+        self.encode() # zakodowanie
+
+
+        print("Image length in bytes: ", len(self.image_bytes))
         print("Image length in bytes after grouping: ", len(self.original_byte_blocks) * self.block_size)
+
+        if transmission_type == "interlace":
+            self.encoded_interlaced_byte_blocks=self.interlace(self.encoded_byte_blocks[:])
+            self.encoded_interlaced_bit_blocks=self.bytes_to_bits(self.encoded_interlaced_byte_blocks)
+        elif transmission_type == "normal":
+            self.encoded_bit_blocks=self.bytes_to_bits(self.encoded_byte_blocks)
+        else:
+            raise Exception("Wrong transmission type! (interlace/normal)")
 
     def divide_to_byte_blocks(self,image_bytes):
         """

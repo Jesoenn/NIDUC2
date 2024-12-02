@@ -8,10 +8,19 @@ class Satellite:
         self.encoded_byte_blocks = []
         self.decoded_byte_blocks = []
         self.image_size = image_size
+        self.count_decoded = (int)
+        self.count_failed = (int)
 
-    def receive_bit_blocks(self, bit_blocks):
+    def receive_bit_blocks(self, bit_blocks, transmission_type, channel_used):
         """Otrzymanie zakodowanych blokow bitow"""
-        self.encoded_bit_blocks = bit_blocks
+        self.encoded_bit_blocks = bit_blocks # odbior bitow
+        self.encoded_byte_blocks=self.bits_to_bytes(self.encoded_bit_blocks) # zamiana bitow na bajty
+
+        if transmission_type == "interlace":
+            self.encoded_byte_blocks=self.deinterlace(self.encoded_byte_blocks)
+
+        self.count_decoded,self.count_failed=self.decode(channel_used)
+
 
     def bits_to_bytes(self, bit_blocks):
         """
