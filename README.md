@@ -3,15 +3,12 @@
 Do zrobienia </br>
 GEC -> probabilistycznie a nie hardcode </br>
 Testy -> to samo co wczesniej + bez przeplotu i z przeplotem + pisac ile bitow w kanale dobrym, ile w zlym </br>
-Transmitter -> aby za parametr jakies metody okreslic czy chce robic z przeplotem czy bez </br>
-Satellite -> Tak samo zrobic zeby okreslic czy przesylamy przeplot czy bez, wiekszosc automatycznie </br>
+
+ZROBIONE 02.12: </br>
 Main -> korekta zeby testy bardziej czytelne byly moze </br>
+Transmitter -> aby za parametr jakies metody okreslic czy chce robic z przeplotem czy bez </br>
 *Do testów, w mainie, itd. pobierac dane po prostu z klasy, czyli zrobic tak zeby wszystko mozna bylo po prostu "wyjac z klas"* </br>
-
-
-
-
-
+Satellite -> Tak samo zrobic zeby okreslic czy przesylamy przeplot czy bez, wiekszosc automatycznie </br>
 
 
 # Stare
