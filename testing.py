@@ -49,3 +49,23 @@ def noise_comparison_in_GEC_channel(bit_blocks, noise_bit_blocks,byte_blocks,noi
 
 def decoder_success_rate_in_GEC_channel(start_state,k,p_to_good,p_to_bad, h, total_blocks,count_decoded,count_failed,is_interlaced):
     file_operations.write_decoding_ratio_for_GEC(start_state,k,p_to_good,p_to_bad,h,total_blocks,count_decoded,count_failed,is_interlaced)
+
+def bits_group_errors_comparison(noise_byte_blocks, byte_blocks, is_interlaced):
+    err_in_group=0
+    error_groups = list()
+    error_distance=0
+    for i in range(len(byte_blocks)):
+        for j in range(len(byte_blocks[0])):
+            if byte_blocks[i][j] != noise_byte_blocks[i][j]:
+                error_distance=0
+                err_occured='true'
+            else:
+                error_distance+=1
+                err_occured='false'
+            if error_distance<=3 and err_occured=='true': err_in_group+=1
+            if error_distance>3 and err_occured=='false':
+                if err_in_group >= 3:  error_groups.append(err_in_group)
+                err_in_group=0
+    num_of_error_groups=len(error_groups)
+    file_operations.write_bits_group_error_comparison(error_groups,num_of_error_groups,is_interlaced)
+
