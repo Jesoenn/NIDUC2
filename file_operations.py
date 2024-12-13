@@ -67,4 +67,12 @@ def write_decoding_ratio_for_GEC(start_state,k,p_to_good,p_to_bad, h, total_bloc
     file = open("decoded_success_ratio_for_GEC.csv", "a")
     file.write(start_state+";"+str(k)+";"+str(p_to_good)+";"+str(p_to_bad)+";"+str(h)+";"+str(Transmitter.block_size)+";"+str(total_blocks)+";"+str(count_decoded)+";"+str(count_failed)+";" + success_ratio+";"+is_interlaced+"\n")
     file.close()
+
+def write_bits_group_error_comparison(error_groups,num_of_error_groups,is_interlaced):
+    if not os.path.exists("bits_group_error_comparison.csv"):
+        create = open("bits_group_error_comparison.csv", "w")
+        create.write("Number of errors in group;Number of errors;Is interlaced? \n ")
+        create.close()
+    file=open("bits_group_error_comparison.csv","a")
+    file.write(str(error_groups)+";"+str(num_of_error_groups)+";"+is_interlaced+"\n")
    
