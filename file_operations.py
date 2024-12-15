@@ -42,8 +42,7 @@ def write_noise_comparison_bits_for_GEC(start_state,k,p_to_good,p_to_bad, h, tot
         create.write("Starting State;k;Basic probability to change channel to good;Basic probability to change channel to bad;h;Total Bits;Total Bit Errors;Total blocks;Average Errors per Block;Is interlaced? \n")
         create.close()
     file = open("noise_bits_for_GEC.csv","a")
-    avg_epr = str(avg_epr).replace(".", ",")
-    file.write(start_state+";"+str(k)+";"+str(p_to_good)+";"+str(p_to_bad)+";"+str(h)+";"+str(total_bits)+";"+str(total_errors)+";"+str(total_blocks)+";"+avg_epr+";"+is_interlaced+"\n")
+    file.write(start_state+";"+str(k)+";"+str(p_to_good)+";"+str(p_to_bad)+";"+str(h)+";"+str(total_bits)+";"+str(total_errors)+";"+str(total_blocks)+";"+str(avg_epr)+";"+is_interlaced+"\n")
     file.close()
 
 def write_noise_comparison_bytes_for_GEC(start_state,k,p_to_good, p_to_bad,h, total_bytes, total_errors, total_blocks, avg_epr, is_interlaced):
@@ -52,8 +51,7 @@ def write_noise_comparison_bytes_for_GEC(start_state,k,p_to_good, p_to_bad,h, to
         create.write("Starting State;k;Basic probability to change channel to good;Basic probability to change channel to bad;h;Total Bytes;Total Byte Errors;Total blocks;Average Errors per Block;Is interlaced? \n")
         create.close()
     file = open("noise_bytes_for_GEC.csv","a")
-    avg_epr = str(avg_epr).replace(".", ",")
-    file.write(start_state+";"+str(k)+";"+str(p_to_good)+";"+str(p_to_bad)+";"+str(h)+";"+str(total_bytes)+";"+str(total_errors)+";"+str(total_blocks)+";"+avg_epr+";"+is_interlaced+"\n")
+    file.write(start_state+";"+str(k)+";"+str(p_to_good)+";"+str(p_to_bad)+";"+str(h)+";"+str(total_bytes)+";"+str(total_errors)+";"+str(total_blocks)+";"+str(avg_epr)+";"+is_interlaced+"\n")
     file.close()
 
 def write_decoding_ratio_for_GEC(start_state,k,p_to_good,p_to_bad, h, total_blocks,count_decoded,count_failed, is_interlaced):
@@ -61,9 +59,7 @@ def write_decoding_ratio_for_GEC(start_state,k,p_to_good,p_to_bad, h, total_bloc
         create = open("decoded_success_ratio_for_GEC.csv", "w")
         create.write("Starting State;k;Basic probability to change channel to good;Basic probability to change channel to bad;h;Block size;Total Blocks;Decoded Blocks;Failed Blocks;Success Ratio;Is interlaced?\n")
         create.close()
-
-    success_ratio=str(count_decoded/total_blocks).replace(".",",")
-
+    success_ratio=str(count_decoded/total_blocks)
     file = open("decoded_success_ratio_for_GEC.csv", "a")
     file.write(start_state+";"+str(k)+";"+str(p_to_good)+";"+str(p_to_bad)+";"+str(h)+";"+str(Transmitter.block_size)+";"+str(total_blocks)+";"+str(count_decoded)+";"+str(count_failed)+";" + success_ratio+";"+is_interlaced+"\n")
     file.close()
@@ -75,4 +71,3 @@ def write_bits_group_error_comparison(error_groups,num_of_error_groups,is_interl
         create.close()
     file=open("bits_group_error_comparison.csv","a")
     file.write(str(error_groups)+";"+str(num_of_error_groups)+";"+is_interlaced+"\n")
-   
