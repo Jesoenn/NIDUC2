@@ -1,5 +1,6 @@
 
 from BSC import BSC
+from image_operations import visualize_gec, visualize_states
 from transmitter import Transmitter
 from satellite import Satellite
 from GEC import GEC 
@@ -13,6 +14,7 @@ satellite = Satellite(transmitter.image_size)
 channel_used = "BSC"
 transmission_types= ["interlace","normal"]
 channels = ["GOOD","MEDIUM","BAD"]
+"""
 for chosen_channel in channels:
     channel = BSC(chosen_channel)
     transmission_type="interlace"
@@ -31,6 +33,7 @@ for chosen_channel in channels:
         testing.noise_comparison(transmitter.encoded_interlaced_bit_blocks, noise_bit_blocks,
                                  transmitter.encoded_byte_blocks, satellite.encoded_byte_blocks, chosen_channel,
                                  channel.bit_error_rate)
+                                 
 states =["GOOD","BAD"]
 for chosen_state in states:
     gec = GEC()
@@ -67,5 +70,13 @@ for chosen_state in states:
                                                         gec.k, gec.p_to_good, gec.p_to_bad, gec.h, "false")
                 # test na występowanie przekłamanych bajtów obok siebie, w celu porównania działania przeplotu
                 testing.bits_group_errors_comparison(satellite.encoded_byte_blocks,transmitter.encoded_byte_blocks,
-                                                     "false")
+                                                     "false")"""
+
+
+transmitter.prepare_to_transmit("interlace")
+testGec = GEC()
+noise_bit_blocks = testGec.simulation("GOOD",transmitter.encoded_interlaced_bit_blocks)
+state_blocks = testGec.state_blocks
+visualize_gec(noise_bit_blocks, transmitter.encoded_interlaced_bit_blocks)
+visualize_states(state_blocks)
 

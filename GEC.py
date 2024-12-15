@@ -1,10 +1,13 @@
 import random
+
+
 class GEC:
     def __init__(self):
         self.p_to_bad =0.0002 # prawdopodobieństwo przejscia na zły kanał
         self.p_to_good = 0.0002 # prawdopodobieństwo przejscia na dobry kanał
         self.k = 0.0003  # prawdobodobieństwo błędu w w dobrym kanale
         self.h = 0.02  # prawdobodobieństwo błędu w w złym kanale
+        self.state_blocks=[]
 
     def simulation(self,start_state, bit_blocks):
         """Otrzymuje bloki bitow przesylane przez kanal i zwraca je z szumem
@@ -15,14 +18,18 @@ class GEC:
         return self.gec(start_state, bit_blocks[:])
 
     def gec(self,start_state, bit_blocks):
+        self.state_blocks=[]
+
         state = start_state
         no_err = 0
         err_num = 0
         for i in range(len(bit_blocks)):
             bit_block = bit_blocks[i]
             temp_bitblock = ""
+            temp_state_block = ""
             for bit in bit_block:
                 if state == "GOOD":
+                    temp_state_block+="1"
                     if random.random() <= self.k:
                         if bit == "0":
                             temp_bitblock += "1"
@@ -36,6 +43,7 @@ class GEC:
                         state = "BAD"
                         err_num = 0
                 elif state == "BAD": #mała szansa zmienienia na dobry, szansa rosnie gdy pojawiają sie pod rząd bity bez błędów
+                    temp_state_block += "0"
                     if random.random() <= self.h:
                         if bit == "0":
                             temp_bitblock += "1"
@@ -54,6 +62,7 @@ class GEC:
 
                 else:
                     raise Exception("Incorrect state")
+            self.state_blocks.append(temp_state_block)
             bit_block = temp_bitblock
             bit_blocks[i]=bit_block
         return bit_blocks
