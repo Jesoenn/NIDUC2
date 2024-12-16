@@ -10,9 +10,9 @@
 ### Pytania na 17.12
 - Przeplot robiony jest na całych danych z pliku, czy tak może być?
 - Czy przeplot ma być po zakodowaniu (DVB)? <br/>
-**EPORTAL:** `Symulacyjna ocena skuteczności transmisji dla różnych parametrów kanałów (model i parametry błędów) i różnych sposobów transmisji.`
-- Czy mamy przetestować różne ilości np. bitów parzystości dla Reeda-Salomona i wybrać najlepsze, albo wywnioskować coś?
-- Czy modyfikować prawdopodobieństwo błędów i jakoś wizualizować?
+- **EPORTAL:** `Symulacyjna ocena skuteczności transmisji dla różnych parametrów kanałów (model i parametry błędów) i różnych sposobów transmisji.`
+ - Czy mamy przetestować różne ilości np. bitów parzystości dla Reeda-Salomona i wybrać najlepsze, albo wywnioskować coś?
+ - Czy modyfikować prawdopodobieństwo błędów i jakoś wizualizować?
 
 ## Plany
 
