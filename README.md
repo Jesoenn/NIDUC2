@@ -11,8 +11,8 @@
 - Przeplot robiony jest na całych danych z pliku, czy tak może być?
 - Czy przeplot ma być po zakodowaniu (DVB)? <br/>
 - **EPORTAL:** `Symulacyjna ocena skuteczności transmisji dla różnych parametrów kanałów (model i parametry błędów) i różnych sposobów transmisji.`
- - Czy mamy przetestować różne ilości np. bitów parzystości dla Reeda-Salomona i wybrać najlepsze, albo wywnioskować coś?
- - Czy modyfikować prawdopodobieństwo błędów i jakoś wizualizować?
+    - Czy mamy przetestować różne ilości np. bitów parzystości dla Reeda-Salomona i wybrać najlepsze, albo wywnioskować coś?
+    - Czy modyfikować prawdopodobieństwo błędów i jakoś wizualizować?
 
 ## Plany
 
@@ -24,10 +24,7 @@
 ## Parametry
 ### Reeda-Solomona
 - GF(2^8)
- -
-
-
-Znalazlem ze GF(2^8), wiec dalem rozumiem to tak, ze:<br/>
- kazda "litera" ma 8 bitow, czyli daje to bajt <br/>
- maksymalna liczba slow 2^8-1 = 255<br/>
- dalem slowa wejsciowe 249 i kodowe 6 (3 bledy do poprawy)<br/>
+    - symbol: 8 bitów
+    - n: 2^8-1 = 255
+    - k = 249
+    - 2t = 6 (3 bledy do korekcji)
