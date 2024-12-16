@@ -21,6 +21,10 @@ project/
 │
 ├── visualization/
 │   ├── image_operations (podzielić to na więcej plików dla czytelności)
+|
+├── output/
+│   ├── zdjęcia
+│   ├── pliki tekstowe
 │
 |── main.py
 ```
