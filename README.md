@@ -2,25 +2,28 @@
 ## Rzeczy do zrobienia
 
 ### Lista 16.12.2024
-project/ <br>
-│<br>
-├── model/<br>
-│   ├── BSC.py<br>
-│   ├── GilbertElliotChannel.py<br>
-│   ├── rs_coder.py<br>
-│   ├── LDPC.py<br>
-│<br>
-├── Transmission/<br>
-│   ├── transmitter.py<br>
-|   ├── satellite.py<br>
-│<br>
-├── utils/<br>
-│   ├── file_operations.py<br>
-│<br>
-├── visualization/<br>
-│   ├── image_operations (podzielić to na więcej plików dla czytelności)<br>
-│<br>
-|── main.py<br>
+- Podzielić kod na pakiety jak w Javie.
+```
+project/ 
+│
+├── model/
+│   ├── BSC.py
+│   ├── GilbertElliotChannel.py
+│   ├── rs_coder.py
+│   ├── LDPC.py
+│
+├── Transmission/
+│   ├── transmitter.py
+|   ├── satellite.py
+│
+├── utils/
+│   ├── file_operations.py
+│
+├── visualization/
+│   ├── image_operations (podzielić to na więcej plików dla czytelności)
+│
+|── main.py
+```
 - Pozmieniać nazwy plików, aby wpasować to do modelu:
 
 ![image](https://github.com/user-attachments/assets/24888e81-2186-472e-ac65-22720aa2b23f)
