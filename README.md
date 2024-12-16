@@ -54,3 +54,6 @@ project/
     - n: 2^8-1 = 255
     - k = 249
     - 2t = 6 (3 bledy do korekcji)
+
+## Do sprawka:
+![image](https://github.com/user-attachments/assets/637026ba-04a4-4c2e-9930-0fcd72230b21)
