@@ -2,7 +2,7 @@
 ## Rzeczy do zrobienia
 
 ### Lista 16.12.2024
-`project/ <br>
+project/ <br>
 │<br>
 ├── model/<br>
 │   ├── BSC.py<br>
@@ -20,7 +20,7 @@
 ├── visualization/<br>
 │   ├── image_operations (podzielić to na więcej plików dla czytelności)<br>
 │<br>
-|── main.py<br>`
+|── main.py<br>
 - Pozmieniać nazwy plików, aby wpasować to do modelu:
 
 ![image](https://github.com/user-attachments/assets/24888e81-2186-472e-ac65-22720aa2b23f)
