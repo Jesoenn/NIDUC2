@@ -16,7 +16,7 @@
 
 ## Plany
 
-##Użyte biblioteki:
+## Użyte biblioteki:
 - reedsolo
 - PIL
 - [...]
