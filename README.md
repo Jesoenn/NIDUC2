@@ -3,6 +3,7 @@
 
 ### Lista 16.12.2024
 - Podzielić kod na pakiety jak w Javie.
+project/ │ ├── model/ │ ├── BSC.py │ ├── GilbertElliotChannel.py │ ├── rs_coder.py │ ├── LDPC.py │ ├── Transmission/ │ ├── transmitter.py │ ├── satellite.py │ ├── utils/ │ ├── file_operations.py │ ├── visualization/ │ ├── image_operations (podzielić to na więcej plików dla czytelności) │ └── main.py
 `project/
 │
 ├── model/
