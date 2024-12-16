@@ -3,6 +3,25 @@
 
 ### Lista 16.12.2024
 - Podzielić kod na pakiety jak w Javie.
+`project/
+│
+├── model/
+│   ├── BSC.py
+│   ├── GilbertElliotChannel.py
+│   ├── rs_coder.py
+│   ├── LDPC.py
+│
+├── Transmission/
+│   ├── transmitter.py
+|   ├── satellite.py
+│
+├── utils/
+│   ├── file_operations.py
+│
+├── visualization/
+│   ├── image_operations (podzielić to na więcej plików dla czytelności)
+│
+|── main.py`
 - Pozmieniać nazwy plików, aby wpasować to do modelu:
 
 ![image](https://github.com/user-attachments/assets/24888e81-2186-472e-ac65-22720aa2b23f)
@@ -13,6 +32,7 @@
 - **EPORTAL:** `Symulacyjna ocena skuteczności transmisji dla różnych parametrów kanałów (model i parametry błędów) i różnych sposobów transmisji.`
     - Czy mamy przetestować różne ilości np. bitów parzystości dla Reeda-Salomona i wybrać najlepsze, albo wywnioskować coś?
     - Czy modyfikować prawdopodobieństwo błędów i jakoś wizualizować?
+- Czy jakieś dodatkowe techniki zaimplementować? (np. modulacja)
 
 ## Plany
 
