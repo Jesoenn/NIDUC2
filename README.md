@@ -21,6 +21,10 @@
 - PIL
 - [...]
 
+## Parametry
+### Reeda-Solomona
+- GF(2^8)
+ -
 
 
 Znalazlem ze GF(2^8), wiec dalem rozumiem to tak, ze:<br/>
