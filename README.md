@@ -41,6 +41,10 @@ project/
 - Czy jakieś dodatkowe techniki zaimplementować? (np. modulacja)
 
 ## Plany
+- Stworzenie różnych funkcji do testowania
+      - 1 odpalenie GEC, BSC
+      - Wielokrotne odpalenie z zapisem danych
+      - [...]
 
 ## Użyte biblioteki:
 - reedsolo
