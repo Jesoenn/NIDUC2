@@ -42,9 +42,9 @@ project/
 
 ## Plany
 - Stworzenie różnych funkcji do testowania
-      - 1 odpalenie GEC, BSC
-      - Wielokrotne odpalenie z zapisem danych
-      - [...]
+    - 1 odpalenie GEC, BSC
+    - Wielokrotne odpalenie z zapisem danych
+    - [...]
 
 ## Użyte biblioteki:
 - reedsolo
