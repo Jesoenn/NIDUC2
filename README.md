@@ -2,7 +2,7 @@
 ## Rzeczy do zrobienia
 
 ### Lista 16.12.2024
-- Podzielić kod na pakiety jak w Javie.
+- Podzielić kod na pakiety jak w Javie. **[DONE]**
 ```
 project/ 
 │
