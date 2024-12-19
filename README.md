@@ -28,19 +28,19 @@ project/
 │
 |── main.py
 ```
-- Pozmieniać nazwy plików, aby wpasować to do modelu:
-
-![image](https://github.com/user-attachments/assets/24888e81-2186-472e-ac65-22720aa2b23f)
-
-### Pytania na 17.12
-- Przeplot robiony jest na całych danych z pliku, czy tak może być? **TAK**
-- Czy przeplot ma być po zakodowaniu (DVB)? <br/> **TAK**
-- **EPORTAL:** `Symulacyjna ocena skuteczności transmisji dla różnych parametrów kanałów (model i parametry błędów) i różnych sposobów transmisji.`
-    - Czy mamy przetestować różne ilości np. bitów parzystości dla Reeda-Salomona i wybrać najlepsze, albo wywnioskować coś?
-    - Czy modyfikować prawdopodobieństwo błędów i jakoś wizualizować?
-- Czy jakieś dodatkowe techniki zaimplementować? (np. modulacja)
 
 ## Plany
+- Uniwersalnosc skryptow:
+    - transmitterowi trzeba podaj rozmiary blokow bajtowych
+    - transmitterowi trzeba napisac czy przeplot czy bez
+    - uniwersalny przeplot -> bez hardcodowanego rozmiaru bloku!!
+    - Do kanalow BSC i GEC dodac enumy jako konstruktory klasy
+    - zapis plikow dac do skryptow testujacych, a nie ***testing.py*** 
+    - Zrobic skrypty testujące do których będzie sie odwolywac main
+    - Bardziej uniwersalne file_operations: ja podaje nazwe pliku **(moze jako enum?)**
+    - bits_to_bytes i bytes_to_bits z klas **Transmitter i Satellite** dac do nowego common
+    - W satelicie okreslic jakie kodowanie jest robione -> **RS CZY LDPC TEZ JAKO ENUM** -> do decode
+    - 
 - Stworzenie różnych funkcji do testowania
     - 1 odpalenie GEC, BSC
     - Wielokrotne odpalenie z zapisem danych
