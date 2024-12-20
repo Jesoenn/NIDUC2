@@ -38,7 +38,7 @@ project/
     - zapis plikow dac do skryptow testujacych, a nie ***testing.py*** 
     - Zrobic skrypty testujące do których będzie sie odwolywac main
     - Bardziej uniwersalne file_operations: ja podaje nazwe pliku **(moze jako enum?)**
-    - bits_to_bytes i bytes_to_bits z klas **Transmitter i Satellite** dac do nowego common
+    - bits_to_bytes i bytes_to_bits z klas **Transmitter i Satellite** dac do nowego common (unit_operations)
     - W satelicie okreslic jakie kodowanie jest robione -> **RS CZY LDPC TEZ JAKO ENUM** -> do decode **[ZROBIONE, DO PRZESŁANIA]**
     - 
 - Stworzenie różnych funkcji do testowania
