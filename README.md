@@ -31,9 +31,9 @@ project/
 
 ## Plany
 - Uniwersalnosc skryptow:
-    - transmitterowi trzeba podaj rozmiary blokow bajtowych
-    - transmitterowi trzeba napisac czy przeplot czy bez
-    - uniwersalny przeplot -> bez hardcodowanego rozmiaru bloku!!
+    - transmitterowi trzeba podaj rozmiary blokow bajtowych **[NA LAPKU ZROBIONE, DO PRZESŁANIA]**
+    - transmitterowi trzeba napisac czy przeplot czy bez **[NA LAPKU ZROBIONE, DO PRZESŁANIA]**
+    - uniwersalny przeplot -> bez hardcodowanego rozmiaru bloku!! **[NA LAPKU ZROBIONE, DO PRZESŁANIA]**
     - Do kanalow BSC i GEC dodac enumy jako konstruktory klasy
     - zapis plikow dac do skryptow testujacych, a nie ***testing.py*** 
     - Zrobic skrypty testujące do których będzie sie odwolywac main
