@@ -1,50 +1,17 @@
 # NIDUC2
-## Rzeczy do zrobienia
-
-### Lista 16.12.2024
-- Podzielić kod na pakiety jak w Javie. **[DONE]**
-```
-project/ 
-│
-├── model/
-│   ├── BSC.py
-│   ├── GilbertElliotChannel.py
-│   ├── rs_coder.py
-│   ├── LDPC.py
-│
-├── Transmission/
-│   ├── transmitter.py
-|   ├── satellite.py
-│
-├── utils/
-│   ├── file_operations.py
-│
-├── visualization/
-│   ├── image_operations (podzielić to na więcej plików dla czytelności)
-|
-├── output/
-│   ├── zdjęcia
-│   ├── pliki tekstowe
-│
-|── main.py
-```
-
+## Changelog
+###21.12.2024
+- Podzielone pliki na pakiety i foldery
+- Dodane enumy do przeplotów, kodów i kanałów, żeby nie pisać wszystkiego jako string
+- transmitter.py: teraz na wejście trzeba podać rozmiar bloku informacji, koder, rodzaj przeplotu i ilosc symboli parzystości, ale chyba do LDPC jeszcze trzeba zrobić parę poprawek
+- Do kanalow BSC dodałem enumy jako konstruktory klasy
+- skrypty testujące w folderze simulations od teraz lepiej dawac, bo potem jak coś będzie się chciało powtórzyć to trzeba od nowa kod wymyślać
+- sattelite.py dodane enumy
+- testing.py zmiana metody do sukcesów dekodowania, porównywania bitów i bajtów danych w kanale BSC: bsc_noise_comparison. Wszystko uniwersalne
+- file_operations uniwersalna metoda write_decoding_ratio, write_bsc_noise_comparison: wpisuje albo do pliku z bitami albo bajtami i wybór kodu i kanału
+- **w testing i file_operations i gec nic związanego z kanałem gilbera nie zmieniałem**, więc trzeba pewnie będzie poprawić parę rzeczy
 ## Plany
-- Uniwersalnosc skryptow:
-    - transmitterowi trzeba podaj rozmiary blokow bajtowych **[NA LAPKU ZROBIONE, DO PRZESŁANIA]**
-    - transmitterowi trzeba napisac czy przeplot czy bez **[NA LAPKU ZROBIONE, DO PRZESŁANIA]**
-    - uniwersalny przeplot -> bez hardcodowanego rozmiaru bloku!! **[NA LAPKU ZROBIONE, DO PRZESŁANIA]**
-    - Do kanalow BSC i ~GEC~ dodac enumy jako konstruktory klasy **[ZROBIONE, DO PRZESŁANIA ALE BEZ GEC]**
-    - zapis plikow dac do skryptow testujacych, a nie ***testing.py*** 
-    - Zrobic skrypty testujące do których będzie sie odwolywac main
-    - Bardziej uniwersalne file_operations: ja podaje nazwe pliku **(moze jako enum?)**
-    - bits_to_bytes i bytes_to_bits z klas **Transmitter i Satellite** dac do nowego common (unit_operations)
-    - W satelicie okreslic jakie kodowanie jest robione -> **RS CZY LDPC TEZ JAKO ENUM** -> do decode **[ZROBIONE, DO PRZESŁANIA]**
-    - 
-- Stworzenie różnych funkcji do testowania
-    - 1 odpalenie GEC, BSC
-    - Wielokrotne odpalenie z zapisem danych
-    - [...]
+- bits_to_bytes i bytes_to_bits z klas **Transmitter i Satellite** dac do nowego common (unit_operations)
 - Z zajęć **17.12.2024**
     - Testy transmisji z naszymi parametrami kanałów
     - Testy, które doprowadziły do wybrania tych parametrów (wybór BER)
