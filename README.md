@@ -9,7 +9,7 @@
 - sattelite.py dodane enumy
 - testing.py zmiana metody do sukcesów dekodowania, porównywania bitów i bajtów danych w kanale BSC: bsc_noise_comparison. Wszystko uniwersalne
 - file_operations uniwersalna metoda write_decoding_ratio, write_bsc_noise_comparison: wpisuje albo do pliku z bitami albo bajtami i wybór kodu i kanału
-- **w testing i file_operations i gec nic związanego z kanałem gilbera nie zmieniałem**, więc trzeba pewnie będzie poprawić parę rzeczy
+- **w testing i file_operations i gec nic związanego z kanałem gilberta nie zmieniałem**, więc trzeba pewnie będzie poprawić parę rzeczy
 ## Plany
 - bits_to_bytes i bytes_to_bits z klas **Transmitter i Satellite** dac do nowego common (unit_operations)
 - Z zajęć **17.12.2024**
