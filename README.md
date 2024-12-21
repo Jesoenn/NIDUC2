@@ -1,6 +1,6 @@
 # NIDUC2
 ## Changelog
-###21.12.2024
+### 21.12.2024
 - Podzielone pliki na pakiety i foldery
 - Dodane enumy do przeplotów, kodów i kanałów, żeby nie pisać wszystkiego jako string
 - transmitter.py: teraz na wejście trzeba podać rozmiar bloku informacji, koder, rodzaj przeplotu i ilosc symboli parzystości, ale chyba do LDPC jeszcze trzeba zrobić parę poprawek
