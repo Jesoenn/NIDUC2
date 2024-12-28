@@ -26,8 +26,22 @@ def write_bsc_noise_comparison(channel_quality: str, ber: float, total_symbols: 
     file.close()
 
 
-def write_decoding_ratio(code: str,channel_quality: str, ber, total_blocks: int,count_decoded: int,count_failed: int, block_size: int, channel_name: str, is_interleaved: str):
-    file_path="./output/csv_exports/decoded_success_ratio.csv"
+def write_decoding_ratio(code: str,channel_quality: str, ber, total_blocks: int,count_decoded: int,count_failed: int, block_size: int, channel_name: str, is_interleaved: str, decoding_type: str):
+    file_path="./output/csv_exports/decoded_"+decoding_type+"_success_ratio.csv"
+    if not os.path.exists(file_path):
+        create = open(file_path, "w")
+        create.write("Code;Channel Name;With Interleaving;Channel Quality;BER;Block size;Total "+decoding_type+";Decoded "+decoding_type+";Failed "+decoding_type+";Success Ratio\n")
+        create.close()
+
+    ber=str(ber).replace(".",",")
+    success_ratio=str(count_decoded/(count_decoded+count_failed)).replace(".",",")
+
+    file = open(file_path, "a")
+    file.write(code+";"+str(channel_name)+";"+str(is_interleaved)+";"+str(channel_quality)+";"+ber+";"+str(block_size)+";"+str(total_blocks)+";"+str(count_decoded)+";"+str(count_failed)+";" + success_ratio+"\n")
+    file.close()
+
+def write_decoding_block_ratio(code: str,channel_quality: str, ber, total_blocks: int,count_decoded: int,count_failed: int, block_size: int, channel_name: str, is_interleaved: str):
+    file_path="./output/csv_exports/decoded_blocks_success_ratio.csv"
     if not os.path.exists(file_path):
         create = open(file_path, "w")
         create.write("Code;Channel Name;With Interleaving;Channel Quality;BER;Block size;Total Blocks;Decoded Blocks;Failed Blocks;Success Ratio\n")
@@ -39,6 +53,21 @@ def write_decoding_ratio(code: str,channel_quality: str, ber, total_blocks: int,
     file = open(file_path, "a")
     file.write(code+";"+str(channel_name)+";"+str(is_interleaved)+";"+str(channel_quality)+";"+ber+";"+str(block_size)+";"+str(total_blocks)+";"+str(count_decoded)+";"+str(count_failed)+";" + success_ratio+"\n")
     file.close()
+
+def write_decoding_byte_ratio(code: str,channel_quality: str, ber, total_blocks: int,count_decoded: int,count_failed: int, block_size: int, channel_name: str, is_interleaved: str):
+    file_path="./output/csv_exports/decoded_bytes_success_ratio.csv"
+    if not os.path.exists(file_path):
+        create = open(file_path, "w")
+        create.write("Code;Channel Name;With Interleaving;Channel Quality;BER;Block size;Total Bytes;Decoded Bytes;Failed Bytes;Success Ratio\n")
+        create.close()
+
+    ber=str(ber).replace(".",",")
+    success_ratio=str(count_decoded/total_blocks).replace(".",",")
+
+    file = open(file_path, "a")
+    file.write(code+";"+str(channel_name)+";"+str(is_interleaved)+";"+str(channel_quality)+";"+ber+";"+str(block_size)+";"+str(total_blocks)+";"+str(count_decoded)+";"+str(count_failed)+";" + success_ratio+"\n")
+    file.close()
+
 
 def write_noise_comparison_bits_for_GEC(start_state,k,p_to_good,p_to_bad, h, total_bits, total_errors, total_blocks, avg_epr, is_interlaced):
     if not os.path.exists("noise_bits_for_GEC.csv"):

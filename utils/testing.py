@@ -33,7 +33,7 @@ def bsc_noise_comparison(code: CodeType, blocks, noise_blocks,channel: ChannelSt
     file_operations.write_bsc_noise_comparison(channel.value, ber, len(blocks) * len(blocks[0]), total_errors, len(blocks), total_errors / len(blocks), unit_type, code.value)
 
 def decoder_success_rate(channel_quality: ChannelStates, ber: float, total_blocks: int,count_decoded: int,count_failed: int,block_size: int,
-                         interleaving: InterleavingMode, channel_name: Channel, code: CodeType):
+                         interleaving: InterleavingMode, channel_name: Channel, code: CodeType, decoding_type: str):
     """Wpisuje do pliku ile dekodowan sie powiodlo i ile nie
     Parametry:
         - channel_name: string
@@ -48,7 +48,7 @@ def decoder_success_rate(channel_quality: ChannelStates, ber: float, total_block
     elif interleaving == InterleavingMode.WITHOUT_INTERLEAVING:
         write_interleaving = "NO"
 
-    file_operations.write_decoding_ratio(code.value,channel_quality.value,ber,total_blocks,count_decoded,count_failed,block_size,channel_name.value,write_interleaving)
+    file_operations.write_decoding_ratio(code.value,channel_quality.value,ber,total_blocks,count_decoded,count_failed,block_size,channel_name.value,write_interleaving, decoding_type)
 
 def noise_comparison_in_GEC_channel(bit_blocks, noise_bit_blocks,byte_blocks,noise_byte_blocks,start_state,k,p_to_good,p_to_bad,h,is_interlaced):
     errors_bit_list=compare_blocks(bit_blocks, noise_bit_blocks)

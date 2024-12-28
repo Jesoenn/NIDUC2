@@ -13,8 +13,6 @@ class Satellite:
         self.encoded_interlaced_byte_blocks = []
         self.decoded_byte_blocks = []
         self.image_size = image_size
-        self.count_decoded = 0
-        self.count_failed = 0
 
     def receive_bit_blocks(self, bit_blocks, transmission_type: InterleavingMode, channel_used: Channel, code_used: CodeType, parity_size: int):
         """Otrzymanie zakodowanych blokow bitow"""
@@ -25,7 +23,7 @@ class Satellite:
             if transmission_type == InterleavingMode.WITH_INTERLEAVING:
                 self.encoded_interlaced_byte_blocks=self.encoded_byte_blocks[:]
                 self.encoded_byte_blocks = self.deinterlace(self.encoded_byte_blocks)
-            self.count_decoded, self.count_failed = self.decode_rs(channel_used, parity_size)
+            self.decode_rs(channel_used, parity_size)
         elif code_used == CodeType.LDPC:
             print("LDPC NIE JEST ZROBIONE")
 
@@ -81,14 +79,7 @@ class Satellite:
         """
         self.decoded_byte_blocks=[]
         rs_decoder = RS(parity_size)
-        count_decoded=0
-        count_failed=0
         for encoded_byte_block in self.encoded_byte_blocks:
             decoded_byte_block,decoded_success=rs_decoder.decode(encoded_byte_block, parity_size)
-            if decoded_success:
-                count_decoded+=1
-            else:
-                count_failed+=1
             self.decoded_byte_blocks.append(decoded_byte_block)
-        create_image(self.decoded_byte_blocks,self.image_size, channel_used.value)
-        return count_decoded,count_failed
+        #create_image(self.decoded_byte_blocks,self.image_size, channel_used.value)

@@ -2,10 +2,9 @@ from common.channel_states import ChannelStates
 from common.code_type import CodeType
 from common.interleaving_mode import InterleavingMode
 from models.BSC import BSC
-from simulations.bsc_simulations import file_writing_test_interleaving
+from simulations.bsc_simulations import *
 from simulations.gec_simulations import test_visualization_rs
 from utils.image_operations import visualize_gec, visualize_states
-
 from communication.transmitter import Transmitter
 from communication.satellite import Satellite
 from models.GEC import GEC
@@ -13,7 +12,10 @@ from simulations import bsc_simulations
 from common import channel_states, code_type, interleaving_mode
 from utils import testing
 
-test_visualization_rs()
+#channel_parameters_test()
+#channel_parameters_test_images()
+
+rs_tests()
 
 """
 transmitter = Transmitter()

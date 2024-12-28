@@ -1,7 +1,5 @@
 import math
 import os
-from turtledemo.sorting_animate import start_ssort
-
 from PIL import Image
 
 
@@ -28,7 +26,7 @@ def get_image_bytes():
     return image_bytes,img_size
 
 
-def create_image(image_byte_blocks, image_size, channel_used):
+def create_image(image_byte_blocks, image_size, channel_used: str, channel_quality: str,parity_size: int):
     """
     Na podstawie otrzymanych blokow pixeli, tworzy zdjecie o okreslonym rozmiarze
     Parametry:
@@ -59,9 +57,9 @@ def create_image(image_byte_blocks, image_size, channel_used):
     img.putdata(pixels_RGB)
 
     if channel_used=="BSC":
-        output_file_path = os.path.join(os.getcwd(), "output/images/bsc_images/img_compiled.png")
+        output_file_path = os.path.join(os.getcwd(), "output/images/bsc_images/img_compiled_"+channel_quality+"_"+str(parity_size)+".png")
     else:
-        output_file_path = os.path.join(os.getcwd(), "output/images/gec_images/img_compiled.png")
+        output_file_path = os.path.join(os.getcwd(), "output/images/gec_images/img_compiled_"+channel_quality+"_"+str(parity_size)+".png")
     img.save(output_file_path)
 
 def visualize_gec(noise_bit_blocks, original_bit_blocks):
