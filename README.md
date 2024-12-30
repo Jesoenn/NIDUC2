@@ -1,5 +1,7 @@
 # NIDUC2
 ## Changelog
+### 30.12.2024
+- naprawione obliczanie poprawnie zdekodowanych bloków
 ### 21.12.2024
 - Podzielone pliki na pakiety i foldery
 - Dodane enumy do przeplotów, kodów i kanałów, żeby nie pisać wszystkiego jako string
