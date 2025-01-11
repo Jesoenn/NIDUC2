@@ -114,5 +114,5 @@ class Transmitter:
 
     def ldpc_encode(self):
         ldpc = LDPC(self.block_size*8, self.parity_size, self.LDPC_bites_in_equation)
-        self.encoded_bit_blocks = ldpc.encode(self.original_bit_blocks[:])
+        self.encoded_bit_blocks, encoded_float_message = ldpc.encode(self.original_bit_blocks[:])
         self.encoded_byte_blocks = converter.bits_to_bytes(self.encoded_bit_blocks)

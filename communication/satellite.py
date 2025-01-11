@@ -34,7 +34,7 @@ class Satellite:
                 self.encoded_interlaced_byte_blocks=self.encoded_byte_blocks[:]
                 self.encoded_byte_blocks = self.deinterlace(self.encoded_byte_blocks)
                 self.encoded_bit_blocks = converter.bytes_to_bits(self.encoded_byte_blocks)
-            self.decode_ldpc(parity_size, 3, ldpc_bites_in_equation)
+            self.decode_ldpc(parity_size, ldpc_bites_in_equation)
 
     def deinterlace(self,interlaced_byte_blocks):
         """Zwraca oryginalny ciag wartosci z przeplotu
