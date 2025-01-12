@@ -66,6 +66,10 @@ class Transmitter:
 
         self.encoded_bit_blocks, self.encoded_bit_blocks_base = ldpc.encode(self.original_bit_blocks[:])
         self.encoded_byte_blocks = converter.bits_to_bytes(self.encoded_bit_blocks)
+
+        if transmission_type == InterleavingMode.WITH_INTERLEAVING:
+            self.encoded_interlaced_byte_blocks=self.interlace(self.encoded_byte_blocks[:])
+            self.encoded_interlaced_bit_blocks=converter.bytes_to_bits(self.encoded_interlaced_byte_blocks)
         print(len(self.encoded_bit_blocks[0]))
         
 

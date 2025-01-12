@@ -8,7 +8,7 @@ class LDPC:
         self.d_v = 5                                          # liczba jedynek w każdym wierszu macierzy H
         self.d_c = 10                                          # liczba jedynek w każdej kolumnie macierzy H
         self.seed = seed
-        self.H, self.G = pyldpc.make_ldpc(self.block_size_in_bits, self.d_v, self.d_c, True , self.seed)
+        self.H, self.G = pyldpc.make_ldpc(self.block_size_in_bits, self.d_v, self.d_c, self.seed)
         
         print(self.H.shape)
         print(self.G.shape)
@@ -34,11 +34,19 @@ class LDPC:
         - success_ratio - stosunek poprawnie zdekodowanych bloków do wszystkich
         """
         bit_blocks = converter.ldpc_from_bits_to_float(bit_blocks)
+        j=0
         for i in range(len(bit_blocks)):
+            if(i % (len(bit_blocks)//10) == 0):
+                print("Decoding is {}% done".format(j))
+                j+=10
             bit_blocks[i] = np.array([float(bit) for bit in bit_blocks[i]])
             bit_blocks[i] = pyldpc.decode(self.H, bit_blocks[i], snr=np.inf, maxiter = 10)
-            print("Decoding is done")
-        bit_blocks = ''.join(map(str,self.encoded_bit_blocks_in_bits))     #Konwersja np.array na string
+            bit_blocks[i] = ''.join(map(str,bit_blocks[i]))     #Konwersja np.array na string
+        
+        #print("X:"+bit_blocks)
+        print(type(bit_blocks))
+        print(type(bit_blocks[0]))
+
         return bit_blocks
     
     def encode(self, bit_blocks):
@@ -54,14 +62,10 @@ class LDPC:
         """
         self.original_bit_blocks = bit_blocks
         for i in range(len(bit_blocks)):
-            if i == 0: print(len(bit_blocks[0]))
             bit_blocks[i] = np.array([int(bit) for bit in bit_blocks[i]], dtype=np.uint8)
-            if i == 0: print(len(bit_blocks[0]))
             bit_blocks[i] = pyldpc.encode(self.G, bit_blocks[i], snr=np.inf)
-            if i == 0: print(len(bit_blocks[0]))
         self.encoded_bit_blocks = bit_blocks
         self.encoded_bit_blocks_in_bits = converter.ldpc_from_float_to_bits(self.encoded_bit_blocks)
-        #self.encoded_bit_blocks_in_bits = ''.join(map(str,self.encoded_bit_blocks_in_bits))     #Konwersja np.array na string
         return self.encoded_bit_blocks_in_bits, bit_blocks
      
     def getSuccessRatio(self):

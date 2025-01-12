@@ -25,8 +25,8 @@ transmitter = Transmitter()
 transmitter.get_image()
 satellite = Satellite(transmitter.image_size)
 channel_used = "BSC"
-chosen_channel = channel_states.ChannelStates.MEDIUM
-transmission_type = "normal"
+chosen_channel = channel_states.ChannelStates.GOOD
+transmission_type = "interlace"
 channel = BSC(chosen_channel)
 #transmitter.prepare_to_transmit(transmission_type, 249, 6, CodeType.RS)
 transmitter.prepare_to_transmit_LDPC(transmission_type, 255)
