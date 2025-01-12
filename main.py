@@ -29,11 +29,12 @@ chosen_channel = channel_states.ChannelStates.MEDIUM
 transmission_type = "normal"
 channel = BSC(chosen_channel)
 #transmitter.prepare_to_transmit(transmission_type, 249, 6, CodeType.RS)
-transmitter.prepare_to_transmit(transmission_type, 255,0, CodeType.LDPC)
+transmitter.prepare_to_transmit_LDPC(transmission_type, 255)
 noise_bit_blocks = channel.simulation(transmitter.encoded_bit_blocks)
 satellite.receive_bit_blocks(noise_bit_blocks, transmission_type, channel_used, CodeType.LDPC, 6, 15)
 #satellite.receive_bit_blocks(noise_bit_blocks, transmission_type, channel_used, CodeType.RS, 6)
 create_image(satellite.decoded_byte_blocks, transmitter.image_size, channel_used, chosen_channel, 6)
+print("Done")
 
 """
 transmitter = Transmitter()

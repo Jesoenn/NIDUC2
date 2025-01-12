@@ -55,3 +55,23 @@ def ldpc_from_float_to_bits(float_blocks):
                     bit_block += "0"
             bit_blocks.append(bit_block)
         return bit_blocks
+
+def ldpc_from_bits_to_float(bit_blocks):
+        """
+        Funkcja zamienia bloki bitow na bloki floatow.
+        Parametry:
+            - bit_blocks: list -> string
+            - float_blocks: list -> float
+        Zwraca:
+            - float_blocks
+        """
+        float_blocks = []
+        for bit_block in bit_blocks:
+            float_block = []
+            for bit in bit_block:
+                if bit == "1":
+                    float_block.append(1.0)
+                else:
+                    float_block.append(-1.0)
+            float_blocks.append(float_block)
+        return float_blocks

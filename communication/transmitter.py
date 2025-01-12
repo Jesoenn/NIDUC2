@@ -21,6 +21,7 @@ class Transmitter:
 
         self.encoded_byte_blocks = []
         self.encoded_bit_blocks=[]
+        self.encoded_bit_blocks_base = []        #tylko na uzytek ldpc [zakodowane bloki bitow jako floaty -1 i 1 - efekt kodowania ldpc]
 
         self.encoded_interlaced_byte_blocks = []
         self.encoded_interlaced_bit_blocks=[]
@@ -31,7 +32,7 @@ class Transmitter:
     def get_image(self):
         self.image_bytes, self.image_size = get_image_bytes()
 
-    def prepare_to_transmit(self, transmission_type: InterleavingMode, information_size: int, parity_size: int, chosen_code: CodeType, ldpc_bites_in_equation: int | None=None):
+    def prepare_to_transmit_RS(self, transmission_type: InterleavingMode, information_size: int, parity_size: int):
         """
         Pobranie bytearray pikseli ze zdjecia oraz wielkosc zdjecia
         Parametry:
@@ -40,24 +41,33 @@ class Transmitter:
             - image_bytes: bytearray
             - image_size: list
             - original_byte_blocks: list -> bytearray
-            - ldpc_bites_in_equation: int  (tylko dla ldpc)
         """
         self.information_size = information_size
         self.parity_size = parity_size
         self.block_size = information_size+parity_size
-        self.LDPC_bites_in_equation = ldpc_bites_in_equation
         self.original_byte_blocks = self.divide_to_byte_blocks(self.image_bytes) # podzielenie na bloki
-        self.original_bit_blocks = converter.bytes_to_bits(self.original_byte_blocks) # zamiana bloków bajtów na bloki bitowe (dla kodu LDPC)
+        self.original_bit_blocks = converter.bytes_to_bits(self.original_byte_blocks) # zamiana bloków bajtów na bloki bitowe
 
-        if chosen_code==CodeType.RS:
-            self.rs_encode() # zakodowanie
-        elif chosen_code==CodeType.LDPC:
-            self.ldpc_encode() # zakodowanie
+        self.rs_encode() # zakodowanie
             
         if transmission_type == InterleavingMode.WITH_INTERLEAVING:
             self.encoded_interlaced_byte_blocks=self.interlace(self.encoded_byte_blocks[:])
             self.encoded_interlaced_bit_blocks=converter.bytes_to_bits(self.encoded_interlaced_byte_blocks)
 
+
+    def prepare_to_transmit_LDPC(self, transmission_type: InterleavingMode, block_size: int):
+        self.block_size = block_size
+        
+        ldpc = LDPC(self.block_size*8)
+        self.information_size = ldpc.information_size
+        print(self.information_size)
+        self.original_byte_blocks = self.divide_to_byte_blocks(self.image_bytes)
+        self.original_bit_blocks = converter.bytes_to_bits(self.original_byte_blocks) # zamiana bloków bajtów na bloki bitowe
+
+        self.encoded_bit_blocks, self.encoded_bit_blocks_base = ldpc.encode(self.original_bit_blocks[:])
+        self.encoded_byte_blocks = converter.bits_to_bytes(self.encoded_bit_blocks)
+        print(len(self.encoded_bit_blocks[0]))
+        
 
     def print_info(self):
         print("Image length in bytes: ", len(self.image_bytes))
@@ -112,7 +122,9 @@ class Transmitter:
         self.encoded_byte_blocks = rs.encode(self.original_byte_blocks[:])
         self.encoded_bit_blocks = converter.bytes_to_bits(self.encoded_byte_blocks)
 
+    """
     def ldpc_encode(self):
         ldpc = LDPC(self.block_size*8, self.parity_size, self.LDPC_bites_in_equation)
         self.encoded_bit_blocks, encoded_float_message = ldpc.encode(self.original_bit_blocks[:])
         self.encoded_byte_blocks = converter.bits_to_bytes(self.encoded_bit_blocks)
+    """
