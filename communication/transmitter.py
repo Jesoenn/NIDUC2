@@ -60,7 +60,6 @@ class Transmitter:
         
         ldpc = LDPC(self.block_size*8)
         self.information_size = ldpc.information_size
-        print(self.information_size)
         self.original_byte_blocks = self.divide_to_byte_blocks(self.image_bytes)
         self.original_bit_blocks = converter.bytes_to_bits(self.original_byte_blocks) # zamiana bloków bajtów na bloki bitowe
 
@@ -70,7 +69,6 @@ class Transmitter:
         if transmission_type == InterleavingMode.WITH_INTERLEAVING:
             self.encoded_interlaced_byte_blocks=self.interlace(self.encoded_byte_blocks[:])
             self.encoded_interlaced_bit_blocks=converter.bytes_to_bits(self.encoded_interlaced_byte_blocks)
-        print(len(self.encoded_bit_blocks[0]))
         
 
     def print_info(self):

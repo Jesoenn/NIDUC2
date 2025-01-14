@@ -10,8 +10,8 @@ class LDPC:
         self.seed = seed
         self.H, self.G = pyldpc.make_ldpc(self.block_size_in_bits, self.d_v, self.d_c, True, self.seed)
         
-        print(self.H.shape)
-        print(self.G.shape)
+        #print(self.H.shape)
+        #print(self.G.shape)
         self.original_bit_blocks = []
         self.encoded_bit_blocks = []
         self.encoded_bit_blocks_in_bits = []
@@ -35,39 +35,17 @@ class LDPC:
         """
         bit_blocks = converter.ldpc_from_bits_to_float(bit_blocks)
         j=0
-
-        print("(1) Before decoding")
-        print(type(bit_blocks))
-        print(type(bit_blocks[0]))
-        print(type(bit_blocks[0][0]))
-
-
         for i in range(len(bit_blocks)):
-            #if(i % (len(bit_blocks)//10) == 0):
-                #print("Decoding is {}% done".format(j))
-                #j+=10
+            if(i % (len(bit_blocks)//10) == 0):
+                print("Decoding is {}% done".format(j))
+                j+=10
             bit_blocks[i] = np.array([np.float64(bit) for bit in bit_blocks[i]])
-            if i==0:
-                print("(2) Before decoding")
-                print(type(bit_blocks))
-                print(type(bit_blocks[0]))
-                print(type(bit_blocks[0][0]))
-                print(len(bit_blocks[0]))
             bit_blocks[i] = pyldpc.decode(self.H, bit_blocks[i], snr=np.inf, maxiter = 10)
             bit_blocks[i] = bit_blocks[i][:(self.information_size*8)]
             bit_blocks[i] = ''.join(map(str,bit_blocks[i]))     #Konwersja np.array na string
             if not ("1" in bit_blocks[i] or "0" in bit_blocks[i]):
                 raise Exception("Cos poza 1 i 0?")
         
-        #print("X:"+bit_blocks)
-        print("After decoding")
-        print(type(bit_blocks))
-        print(type(bit_blocks[0]))
-        print(len(bit_blocks[0]))
-        print(len(self.original_bit_blocks[0]))
-        print(bit_blocks[0])
-        print(self.original_bit_blocks[0])
-        print(np.array_equal(bit_blocks[0], self.original_bit_blocks[0]))
         return bit_blocks
     
     def encode(self, bit_blocks):
@@ -81,17 +59,11 @@ class LDPC:
         - encoded_bit_blocks_in_bits - zakodowana lista bloków bitów (w bitach - 0 1)
         - bit_blocks - zakodowana lista bloków bitów (w float -1 i 1)
         """
+        print("Encoding...")
         self.original_bit_blocks = bit_blocks[:]
-        print("Before encoding")
-        print(len(bit_blocks[0]))
         for i in range(len(bit_blocks)):
             bit_blocks[i] = np.array([int(bit) for bit in bit_blocks[i]], dtype=np.uint8)
             bit_blocks[i] = pyldpc.encode(self.G, bit_blocks[i], snr=np.inf)
-        print("After encoding")
-        print(type(bit_blocks))
-        print(type(bit_blocks[0]))
-        print(type(bit_blocks[0][0]))
-        print(len(bit_blocks[0]))
         self.encoded_bit_blocks = bit_blocks
         self.encoded_bit_blocks_in_bits = converter.ldpc_from_float_to_bits(self.encoded_bit_blocks)
         return self.encoded_bit_blocks_in_bits, bit_blocks
