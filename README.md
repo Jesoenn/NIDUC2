@@ -14,11 +14,11 @@ Niduc poprawki sprawko:
 11. Opisy zdjęć lepsze. Dac BER wszędzie. "Po podpisie zdjęcia chce wiedzieć o co chodzi. Bez wczytytywania się w tekst"
 
 
-Wszystko uzasadniac
-Czy wyniki spodziewane
-Bez spisu treści
-Podzial zadań
-Nazwa pliku nazwiska
+Wszystko uzasadniac <br>
+Czy wyniki spodziewane<br>
+Bez spisu treści<br>
+Podzial zadań<br>
+Nazwa pliku nazwiska<br>
 
 
 
