@@ -1,5 +1,33 @@
 # NIDUC2
-## Rzeczy do zrobienia
+## Sprawko TO-DO List
+Niduc poprawki sprawko:
+1. BSC | podpisy zdjęć -> napisac czym jest każdy wiersz pixeli 
+2. BSC | Czy linia trendu pokrywa się z BER [%]
+3. Wykresy kolumnowe dac procentowe (nie 0-1) i czy do ber podobne
+4. RS | przecinki w tabelach pousuwać (zaokrąglenia)
+5. RS | Czemu zwieksza się liczba bajtów
+6. RS | Czemu liczba bloków rośnie liniowo (WYKRES 6)
+7. RS | Kanal średni | Różnice słupkow wyjasnic dlaczego duza dla blokow i mala dla bajtow
+8. RS | dla kanalu dobrego przeplot tez zrobić.
+9. RS | Jakie konsekwencje, ze jest dużo bledow? Co się dzieje z tym wtedy w praktycznych zastosowaniach? Co musi zrobić odbiornik? I jak się z tym walczy
+10. RS | Dac calkowita liczbe bajtow, a nie na blok
+11. Opisy zdjęć lepsze. Dac BER wszędzie. "Po podpisie zdjęcia chce wiedzieć o co chodzi. Bez wczytytywania się w tekst"
+
+
+Wszystko uzasadniac
+Czy wyniki spodziewane
+Bez spisu treści
+Podzial zadań
+Nazwa pliku nazwiska
+
+
+
+
+
+##
+
+
+
 
 ### Lista 16.12.2024
 - Podzielić kod na pakiety jak w Javie. **[DONE]**
